@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmação de Presença | Sabrina & Moab</title>
+
+  <!-- Open Graph / WhatsApp Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Confirmação de Presença | Sabrina & Moab">
+  <meta property="og:description" content="Você foi convidado para celebrar este momento especial conosco! Confirme sua presença.">
+  <meta property="og:image" content="https://sabrina-e-moab.hugenis.com/capa-aleatoria.php">
+  <meta property="og:image:secure_url" content="https://sabrina-e-moab.hugenis.com/capa-aleatoria.php">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Confirmação de Presença | Sabrina & Moab">
+  <meta name="twitter:description" content="Você foi convidado para celebrar este momento especial conosco! Confirme sua presença.">
+  <meta name="twitter:image" content="https://sabrina-e-moab.hugenis.com/capa-aleatoria.php">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wine-primary: #6b0f24;
+      --wine-dark: #400513;
+      --wine-deep: #200207;
+      --wine-light: #8e1b36;
+      --wine-subtle: #fcf4f6;
+      --wine-border: #ebd3da;
+      --gold: #d4af37;
+      --gold-light: #fef08a;
+      --gold-dark: #b89025;
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-main: #2b0c14;
+      --text-muted: #6b4e56;
+      --success-green: #15803d;
+      --danger-red: #b91c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Camadas de Fundo da Tela com Transição de 1 Segundo */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 16px;
+      color: var(--text-main);
+      position: relative;
+      background-color: var(--wine-deep);
+    }
+
+    .bg-screen-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-size: cover;
+      background-position: center 35%;
+      background-repeat: no-repeat;
+      z-index: -3;
+      transition: opacity 1s ease-in-out;
+      pointer-events: none;
+      will-change: opacity;
+    }
+
+    #bg-screen-1 {
+      opacity: 1;
+      background-image: url('/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-33.jpg');
+    }
+
+    #bg-screen-2 {
+      opacity: 0;
+      background-image: url('/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-61.jpg');
+    }
+
+    .bg-gradient-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(135deg, rgba(32, 2, 7, 0.85) 0%, rgba(107, 15, 36, 0.78) 50%, rgba(20, 1, 5, 0.88) 100%);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px;
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(212, 175, 55, 0.4);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .header-banner {
+      background: linear-gradient(180deg, rgba(64, 5, 19, 0.92), rgba(32, 2, 7, 0.97));
+      color: #ffffff;
+      padding: 34px 20px 28px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-banner::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 15%;
+      right: 15%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    /* Galeria / Carrossel de Fotos dos Noivos no Topo com Transição de 1s */
+    .carousel-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 8px;
+      position: relative;
+    }
+
+    .carousel-nav-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(64, 5, 19, 0.75);
+      backdrop-filter: blur(6px);
+      border: 1.5px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      padding-bottom: 2px;
+    }
+
+    .carousel-nav-btn:hover {
+      background: var(--wine-light);
+      border-color: var(--gold-light);
+      color: #ffffff;
+      transform: scale(1.15);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.4);
+    }
+
+    .carousel-nav-btn:active {
+      transform: scale(0.92);
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .avatar-wrapper:hover {
+      transform: scale(1.04);
+    }
+
+    /* Moldura circular com duas camadas para crossfade perfeito de 1s */
+    .avatar-frame {
+      width: 132px;
+      height: 132px;
+      border-radius: 50%;
+      border: 3px solid var(--gold);
+      background: #ffffff;
+      padding: 3px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 25px rgba(212, 175, 55, 0.45);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .couple-avatar {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+      object-fit: cover;
+      object-position: center 25%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: opacity 1s ease-in-out;
+      will-change: opacity;
+    }
+
+    #avatar-img-1 {
+      opacity: 1;
+      z-index: 2;
+    }
+
+    #avatar-img-2 {
+      opacity: 0;
+      z-index: 1;
+    }
+
+    .zoom-hint {
+      position: absolute;
+      bottom: 0px;
+      right: 4px;
+      background: var(--wine-primary);
+      border: 1.5px solid var(--gold);
+      color: #ffffff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+      transition: transform 0.2s ease;
+      z-index: 5;
+    }
+
+    .avatar-wrapper:hover .zoom-hint {
+      transform: scale(1.15) rotate(10deg);
+    }
+
+    .photo-counter-badge {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(32, 2, 7, 0.88);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* Indicadores de bolinhas do carrossel */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      max-width: 220px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      cursor: pointer;
+      transition: all 0.35s ease;
+      padding: 0;
+    }
+
+    .carousel-dot:hover {
+      background: rgba(255, 255, 255, 0.8);
+      transform: scale(1.3);
+    }
+
+    .carousel-dot.active {
+      width: 18px;
+      border-radius: 6px;
+      background: var(--gold);
+      border-color: var(--gold-light);
+      box-shadow: 0 0 10px rgba(212, 175, 55, 0.8);
+    }
+
+    .wedding-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #ffffff;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    }
+
+    .wedding-subtitle {
+      font-size: 12.5px;
+      color: #fce7f3;
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      font-weight: 500;
+    }
+
+    .countdown-box {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .countdown-item {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 8px 10px;
+      border-radius: 10px;
+      min-width: 56px;
+      text-align: center;
+    }
+
+    .countdown-number {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold-light);
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .countdown-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffffff;
+    }
+
+    .content-body {
+      padding: 28px 24px;
+    }
+
+    .greeting-box {
+      background: var(--wine-subtle);
+      border-left: 4px solid var(--wine-primary);
+      padding: 14px 16px;
+      border-radius: 0 14px 14px 0;
+      margin-bottom: 22px;
+    }
+
+    .greeting-text {
+      font-size: 14.5px;
+      color: var(--wine-dark);
+      font-weight: 700;
+    }
+
+    .greeting-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.4;
+    }
+
+    .section-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--wine-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .members-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .member-card {
+      background: #ffffff;
+      border: 1px solid var(--wine-border);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      transition: all 0.25s ease;
+    }
+
+    .member-card:hover {
+      border-color: var(--wine-light);
+      box-shadow: 0 4px 12px rgba(107, 15, 36, 0.08);
+    }
+
+    .member-card.status-confirmed {
+      border-color: var(--success-green);
+      background: #f0fdf4;
+    }
+
+    .member-card.status-declined {
+      border-color: var(--danger-red);
+      background: #fef2f2;
+    }
+
+    .member-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .member-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .member-badge {
+      font-size: 10.5px;
+      font-weight: 600;
+      background: var(--wine-subtle);
+      color: var(--wine-primary);
+      padding: 2px 8px;
+      border-radius: 10px;
+      border: 1px solid var(--wine-border);
+    }
+
+    .member-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .member-option {
+      cursor: pointer;
+      position: relative;
+    }
+
+    .member-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .btn-option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 9px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      color: #64748b;
+      transition: all 0.2s ease;
+      text-align: center;
+      user-select: none;
+    }
+
+    .member-option:hover .btn-option {
+      border-color: #cbd5e1;
+      background: #f1f5f9;
+    }
+
+    /* Sim - Confirmado */
+    .member-option input[value="Confirmado"]:checked + .btn-option {
+      background: var(--success-green);
+      color: #ffffff;
+      border-color: var(--success-green);
+      box-shadow: 0 2px 8px rgba(21, 128, 61, 0.35);
+    }
+
+    /* Não - Recusado */
+    .member-option input[value="Recusado"]:checked + .btn-option {
+      background: var(--danger-red);
+      color: #ffffff;
+      border-color: var(--danger-red);
+      box-shadow: 0 2px 8px rgba(185, 28, 28, 0.35);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .form-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--wine-border);
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text-main);
+      background: #ffffff;
+      resize: vertical;
+      min-height: 75px;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-textarea:focus {
+      outline: none;
+      border-color: var(--wine-primary);
+      box-shadow: 0 0 0 3px rgba(107, 15, 36, 0.1);
+    }
+
+    .deadline-badge {
+      text-align: center;
+      font-size: 12px;
+      color: var(--wine-primary);
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      background: var(--wine-subtle);
+      border-radius: 8px;
+      border: 1px dashed var(--wine-border);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--wine-primary) 0%, var(--wine-light) 100%);
+      color: #ffffff;
+      border: 1px solid var(--gold);
+      padding: 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(107, 15, 36, 0.3);
+      transition: all 0.25s ease;
+      text-transform: uppercase;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(107, 15, 36, 0.45);
+      background: linear-gradient(135deg, var(--wine-dark) 0%, var(--wine-primary) 100%);
+    }
+
+    .btn-submit:active {
+      transform: translateY(1px);
+    }
+
+    /* Modal de Sucesso / Tela Confirmada */
+    .success-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 24px;
+      text-align: center;
+      z-index: 50;
+      border-radius: 28px;
+      display: none;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.98); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .success-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .success-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--wine-dark);
+      margin-bottom: 8px;
+    }
+
+    .success-desc {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 24px;
+      max-width: 400px;
+    }
+
+    .gift-box {
+      background: var(--wine-subtle);
+      border: 1px solid var(--wine-border);
+      border-radius: 16px;
+      padding: 20px 18px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 4px 12px rgba(107, 15, 36, 0.05);
+      position: relative;
+    }
+
+    .gift-badge {
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--wine-deep);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    .gift-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--wine-dark);
+      margin-top: 4px;
+      margin-bottom: 6px;
+    }
+
+    .gift-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .btn-gift {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 100%);
+      color: var(--wine-deep);
+      font-weight: 700;
+      font-size: 12.5px;
+      padding: 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-gift:hover {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
+    }
+
+    /* Botão para atualizar presença caso queira alterar */
+    .btn-reopen {
+      margin-top: 16px;
+      background: transparent;
+      border: 1px solid var(--wine-border);
+      color: var(--wine-primary);
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-reopen:hover {
+      background: var(--wine-subtle);
+      border-color: var(--wine-primary);
+    }
+
+    /* Modal Lightbox para Visualizar Fotos em Tela Cheia com Transição de 1s */
+    .photo-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 1, 4, 0.94);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+      cursor: pointer;
+      animation: modalFadeIn 0.35s ease forwards;
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .photo-modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: default;
+    }
+
+    .photo-modal-img-container {
+      position: relative;
+      max-width: 90vw;
+      max-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .photo-modal img {
+      max-width: 100%;
+      max-height: 75vh;
+      border-radius: 16px;
+      border: 3px solid var(--gold);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 175, 55, 0.45);
+      object-fit: contain;
+      transition: opacity 1s ease-in-out;
+      will-change: opacity;
+    }
+
+    .modal-nav-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(32, 2, 7, 0.85);
+      border: 2px solid var(--gold);
+      color: #ffffff;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      user-select: none;
+      padding-bottom: 3px;
+    }
+
+    .modal-prev-btn {
+      left: -24px;
+    }
+
+    .modal-next-btn {
+      right: -24px;
+    }
+
+    .modal-nav-btn:hover {
+      background: var(--wine-primary);
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+      transform: translateY(-50%) scale(1.15);
+    }
+
+    @media (max-width: 640px) {
+      .modal-prev-btn {
+        left: 8px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
+      .modal-next-btn {
+        right: 8px;
+        width: 40px;
+        height: 40px;
+        font-size: 24px;
+      }
+    }
+
+    .photo-modal-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 12px;
+      gap: 3px;
+    }
+
+    .photo-modal-counter {
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .photo-modal-caption {
+      color: #ffffff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+      text-align: center;
+    }
+
+    .btn-close-modal {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 42px;
+      height: 42px;
+      background: var(--wine-primary);
+      border: 2px solid var(--gold);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+      z-index: 105;
+    }
+
+    .btn-close-modal:hover {
+      transform: scale(1.1);
+      background: var(--wine-light);
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Camadas de transição suave de 1 segundo para o background de tela cheia -->
+  <div class="bg-screen-layer" id="bg-screen-1"></div>
+  <div class="bg-screen-layer" id="bg-screen-2"></div>
+  <div class="bg-gradient-overlay"></div>
+
+  <div class="container">
+    <!-- Header com Galeria de Fotos dos Noivos -->
+    <div class="header-banner">
+      <div class="carousel-container">
+        <button type="button" class="carousel-nav-btn prev-btn" id="prev-photo-btn" aria-label="Foto anterior" title="Foto anterior">‹</button>
+        
+        <div class="avatar-wrapper" id="avatar-btn" title="Toque para ampliar as fotos dos noivos">
+          <div class="avatar-frame">
+            <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-33.jpg" alt="Sabrina & Moab" class="couple-avatar" id="avatar-img-1">
+            <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-61.jpg" alt="Sabrina & Moab" class="couple-avatar" id="avatar-img-2">
+          </div>
+          <div class="zoom-hint">🔍</div>
+          <div class="photo-counter-badge" id="photo-counter-badge">1 / 11</div>
+        </div>
+
+        <button type="button" class="carousel-nav-btn next-btn" id="next-photo-btn" aria-label="Próxima foto" title="Próxima foto">›</button>
+      </div>
+
+      <!-- Indicadores de bolinhas do carrossel -->
+      <div class="carousel-dots" id="carousel-dots">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <h1 class="wedding-title">Sabrina & Moab</h1>
+      <p class="wedding-subtitle">Confirmação de Presença</p>
+
+      <div class="countdown-box">
+        <div class="countdown-item">
+          <div class="countdown-number" id="days">--</div>
+          <div class="countdown-label">Dias</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="hours">--</div>
+          <div class="countdown-label">Horas</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="mins">--</div>
+          <div class="countdown-label">Min</div>
+        </div>
+        <div class="countdown-item">
+          <div class="countdown-number" id="secs">--</div>
+          <div class="countdown-label">Seg</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="content-body">
+      <div class="greeting-box">
+        <div class="greeting-text">Olá, <span id="guest-name-display">Carregando...</span>! 💐</div>
+        <div class="greeting-sub">Por favor, confirme individualmente a presença de cada membro da sua família:</div>
+      </div>
+
+      <form id="rsvp-form" class="rsvp-form">
+        <input type="hidden" id="guest-id" name="id" value="">
+        <input type="hidden" id="guest-name" name="nome" value="">
+
+        <div class="section-title">
+          <span>👥</span> Convidados da sua família
+        </div>
+
+        <!-- Lista dinâmica de membros injetados -->
+        <div class="members-list" id="members-container">
+          <!-- Renderizado via JS -->
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Deixe um recado carinhoso para os noivos:</label>
+          <textarea id="recado" name="recado_aos_noivos" class="form-textarea" rows="3" placeholder="Escreva uma mensagem para a Sabrina e o Moab..."></textarea>
+        </div>
+
+        <div class="deadline-badge">
+          ⏳ Por gentileza, confirme sua presença até o dia <strong>20 de Setembro de 2026</strong>.
+        </div>
+
+        <button type="submit" id="btn-submit" class="btn-submit">Confirmar Presença</button>
+      </form>
+    </div>
+
+    <!-- Modal Sucesso & Pós-Obrigado -->
+    <div id="success-overlay" class="success-overlay">
+      <div class="success-icon">💍</div>
+      <h2 class="success-title" id="success-title">Presença Confirmada!</h2>
+      <p class="success-desc" id="success-message">
+        Muito obrigado! A presença da sua família foi registrada com muito carinho para a <strong>Sabrina & Moab</strong>.
+      </p>
+
+      <!-- Seção de Presentes -->
+      <div class="gift-box">
+        <div class="gift-badge">Lista de Casamento</div>
+        <h3 class="gift-title">Quer presentear os noivos?</h3>
+        <p class="gift-desc">
+          Sua presença é o nosso maior presente! Mas se desejar nos abençoar com um mimo para o nosso novo lar, preparamos uma lista especial.
+        </p>
+        <a href="https://sites.icasei.com.br/sabrina-e-moab" target="_blank" rel="noopener noreferrer" class="btn-gift">
+          🎁 Acessar Lista de Presentes
+        </a>
+      </div>
+
+      <button type="button" id="btn-reopen" class="btn-reopen" style="display:none;">
+        ✏️ Deseja alterar ou rever sua presença?
+      </button>
+    </div>
+  </div>
+
+  <!-- Modal Lightbox para Visualizar Fotos Ampliadas com Transição de 1s -->
+  <div id="photo-modal" class="photo-modal">
+    <div class="photo-modal-content">
+      <button type="button" class="btn-close-modal" id="btn-close-modal" title="Fechar">✕</button>
+      <button type="button" class="modal-nav-btn modal-prev-btn" id="modal-prev-btn" title="Foto anterior">‹</button>
+      <button type="button" class="modal-nav-btn modal-next-btn" id="modal-next-btn" title="Próxima foto">›</button>
+      <div class="photo-modal-img-container">
+        <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-77.jpg" alt="Sabrina & Moab Ampliada" class="photo-modal-img" id="photo-modal-img">
+      </div>
+      <div class="photo-modal-footer">
+        <span class="photo-modal-counter" id="modal-counter">Foto 1 de 11</span>
+        <div class="photo-modal-caption">Sabrina & Moab</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Lista com todas as 11 fotos dos noivos
+    const couplePhotos = [
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-33.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-61.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-77.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-88.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-121.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-148.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-173.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-203.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-204.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-230.jpg",
+      "/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-249.jpg"
+    ];
+    let currentPhotoIndex = 0;
+    let autoSlideInterval = null;
+
+    // Elementos de transição do Avatar (duas camadas para crossfade de 1s)
+    let activeAvatarLayer = 1;
+    const avatarImg1 = document.getElementById('avatar-img-1');
+    const avatarImg2 = document.getElementById('avatar-img-2');
+
+    // Elementos de transição do Background de Tela Cheia (duas camadas para crossfade de 1s)
+    let activeBgLayer = 1;
+    const bgScreen1 = document.getElementById('bg-screen-1');
+    const bgScreen2 = document.getElementById('bg-screen-2');
+
+    const photoCounterBadge = document.getElementById('photo-counter-badge');
+    const carouselDotsContainer = document.getElementById('carousel-dots');
+    const prevPhotoBtn = document.getElementById('prev-photo-btn');
+    const nextPhotoBtn = document.getElementById('next-photo-btn');
+
+    const photoModal = document.getElementById('photo-modal');
+    const photoModalImg = document.getElementById('photo-modal-img');
+    const modalCounter = document.getElementById('modal-counter');
+    const modalPrevBtn = document.getElementById('modal-prev-btn');
+    const modalNextBtn = document.getElementById('modal-next-btn');
+    const avatarBtn = document.getElementById('avatar-btn');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+
+    // Renderiza as bolinhas indicadoras
+    function initDots() {
+      carouselDotsContainer.innerHTML = '';
+      couplePhotos.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'carousel-dot' + (idx === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Ir para a foto ${idx + 1}`);
+        dot.addEventListener('click', () => {
+          goToPhoto(idx);
+          resetAutoSlide();
+        });
+        carouselDotsContainer.appendChild(dot);
+      });
+    }
+
+    // Atualiza a foto ativa com transição suave de 1 segundo (Avatar, Background e Modal)
+    function updatePhotoDisplay(animate = true) {
+      const nextPhotoUrl = couplePhotos[currentPhotoIndex];
+
+      // 1. Transição de 1 segundo no Avatar Central
+      if (activeAvatarLayer === 1) {
+        avatarImg2.src = nextPhotoUrl;
+        avatarImg2.style.opacity = '1';
+        avatarImg1.style.opacity = '0';
+        activeAvatarLayer = 2;
+      } else {
+        avatarImg1.src = nextPhotoUrl;
+        avatarImg1.style.opacity = '1';
+        avatarImg2.style.opacity = '0';
+        activeAvatarLayer = 1;
+      }
+
+      // 2. Transição de 1 segundo no Background da Tela
+      if (activeBgLayer === 1) {
+        bgScreen2.style.backgroundImage = `url('${nextPhotoUrl}')`;
+        bgScreen2.style.opacity = '1';
+        bgScreen1.style.opacity = '0';
+        activeBgLayer = 2;
+      } else {
+        bgScreen1.style.backgroundImage = `url('${nextPhotoUrl}')`;
+        bgScreen1.style.opacity = '1';
+        bgScreen2.style.opacity = '0';
+        activeBgLayer = 1;
+      }
+
+      // 3. Atualiza Badge e Contador
+      if (photoCounterBadge) {
+        photoCounterBadge.innerText = `${currentPhotoIndex + 1} / ${couplePhotos.length}`;
+      }
+
+      // 4. Transição no Modal de Zoom
+      if (photoModalImg) {
+        photoModalImg.style.opacity = '0.3';
+        setTimeout(() => {
+          photoModalImg.src = nextPhotoUrl;
+          photoModalImg.style.opacity = '1';
+        }, 150);
+      }
+
+      if (modalCounter) {
+        modalCounter.innerText = `Foto ${currentPhotoIndex + 1} de ${couplePhotos.length}`;
+      }
+
+      // 5. Atualiza Bolinhas Indicadoras (Dots)
+      const dots = document.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, idx) => {
+        if (idx === currentPhotoIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function nextPhoto() {
+      currentPhotoIndex = (currentPhotoIndex + 1) % couplePhotos.length;
+      updatePhotoDisplay(true);
+    }
+
+    function prevPhoto() {
+      currentPhotoIndex = (currentPhotoIndex - 1 + couplePhotos.length) % couplePhotos.length;
+      updatePhotoDisplay(true);
+    }
+
+    function goToPhoto(index) {
+      currentPhotoIndex = index;
+      updatePhotoDisplay(true);
+    }
+
+    // Auto-avanço suave a cada 5 segundos
+    function startAutoSlide() {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+      autoSlideInterval = setInterval(() => {
+        // Só avança automaticamente se o modal lightbox não estiver aberto
+        if (photoModal.style.display !== 'flex') {
+          nextPhoto();
+        }
+      }, 5000);
+    }
+
+    function resetAutoSlide() {
+      clearInterval(autoSlideInterval);
+      startAutoSlide();
+    }
+
+    // Eventos do carrossel do topo
+    prevPhotoBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevPhoto();
+      resetAutoSlide();
+    });
+
+    nextPhotoBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextPhoto();
+      resetAutoSlide();
+    });
+
+    // Abrir e Fechar Modal da Foto em Alta Resolução
+    avatarBtn.addEventListener('click', () => {
+      if (photoModalImg) {
+        photoModalImg.src = couplePhotos[currentPhotoIndex];
+        photoModalImg.style.opacity = '1';
+      }
+      photoModal.style.display = 'flex';
+    });
+
+    btnCloseModal.addEventListener('click', (e) => {
+      e.stopPropagation();
+      photoModal.style.display = 'none';
+      resetAutoSlide();
+    });
+
+    modalPrevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      prevPhoto();
+      resetAutoSlide();
+    });
+
+    modalNextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      nextPhoto();
+      resetAutoSlide();
+    });
+
+    photoModal.addEventListener('click', (e) => {
+      if (e.target === photoModal) {
+        photoModal.style.display = 'none';
+        resetAutoSlide();
+      }
+    });
+
+    // Navegação via teclado (Setas Esquerda/Direita e Escape)
+    document.addEventListener('keydown', (e) => {
+      if (photoModal.style.display === 'flex') {
+        if (e.key === 'ArrowLeft') {
+          prevPhoto();
+          resetAutoSlide();
+        } else if (e.key === 'ArrowRight') {
+          nextPhoto();
+          resetAutoSlide();
+        } else if (e.key === 'Escape') {
+          photoModal.style.display = 'none';
+          resetAutoSlide();
+        }
+      }
+    });
+
+    // Suporte a gestos touch (Swipe) em dispositivos móveis
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function handleGesture(onSwipeLeft, onSwipeRight) {
+      const diff = touchEndX - touchStartX;
+      if (Math.abs(diff) > 40) {
+        if (diff < 0) {
+          onSwipeLeft();
+        } else {
+          onSwipeRight();
+        }
+      }
+    }
+
+    avatarBtn.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    avatarBtn.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture(() => { nextPhoto(); resetAutoSlide(); }, () => { prevPhoto(); resetAutoSlide(); });
+    }, { passive: true });
+
+    photoModal.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    photoModal.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleGesture(() => { nextPhoto(); resetAutoSlide(); }, () => { prevPhoto(); resetAutoSlide(); });
+    }, { passive: true });
+
+    // Inicializa os dots
+    initDots();
+    startAutoSlide();
+
+    // Contagem regressiva precisa a partir do horário atual
+    // Data do Casamento: 28 de Novembro de 2026 (00:00:00)
+    const weddingDate = new Date(2026, 10, 28, 0, 0, 0).getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = weddingDate - now;
+
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minsEl = document.getElementById('mins');
+      const secsEl = document.getElementById('secs');
+
+      if (distance > 0) {
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const secs = Math.floor((distance % (1000 * 60)) / 1000);
+
+        if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
+        if (hoursEl) hoursEl.innerText = String(hours).padStart(2, '0');
+        if (minsEl) minsEl.innerText = String(mins).padStart(2, '0');
+        if (secsEl) secsEl.innerText = String(secs).padStart(2, '0');
+      } else {
+        if (daysEl) daysEl.innerText = '00';
+        if (hoursEl) hoursEl.innerText = '00';
+        if (minsEl) minsEl.innerText = '00';
+        if (secsEl) secsEl.innerText = '00';
+      }
+    }
+
+    // Inicia imediatamente a partir do horário atual e atualiza a cada segundo
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    // Parâmetros da URL ou injetados
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestId = urlParams.get('id') || '1000';
+    let guestName = urlParams.get('nome') || '';
+
+    document.getElementById('guest-id').value = guestId;
+
+    let membersData = window.GUEST_MEMBERS || [];
+    const container = document.getElementById('members-container');
+
+    function renderMembers(list) {
+      container.innerHTML = '';
+      if (!list || list.length === 0) {
+        list = [{ id_acompanhante: guestId + '-1', nome: guestName || 'Convidado', parentesco: 'Titular' }];
+      }
+
+      list.forEach((membro, index) => {
+        const id = membro.id_acompanhante || `${guestId}-${index + 1}`;
+        const nome = membro.nome || membro.Nome_Membro || 'Convidado';
+        const parentesco = membro.parentesco || membro.Parentesco_Tipo || '';
+        const statusAtual = (membro.status || membro.status_presenca || membro.Status_Presenca || '').toString().trim();
+
+        const card = document.createElement('div');
+        card.className = 'member-card';
+        card.id = `card-member-${id}`;
+
+        const isConfirmado = statusAtual === 'Confirmado';
+        const isRecusado = statusAtual === 'Recusado' || statusAtual === 'Não Irá';
+
+        if (isConfirmado) card.classList.add('status-confirmed');
+        if (isRecusado) card.classList.add('status-declined');
+
+        card.innerHTML = `
+          <div class="member-header">
+            <span class="member-name">${nome}</span>
+            ${parentesco ? `<span class="member-badge">${parentesco}</span>` : ''}
+          </div>
+          <div class="member-actions">
+            <label class="member-option">
+              <input type="radio" name="status_presenca_${id}" value="Confirmado" ${isConfirmado ? 'checked' : ''} required data-member-id="${id}" data-member-name="${nome}">
+              <span class="btn-option opt-sim">🟢 Irá comparecer</span>
+            </label>
+            <label class="member-option">
+              <input type="radio" name="status_presenca_${id}" value="Recusado" ${isRecusado ? 'checked' : ''} required data-member-id="${id}" data-member-name="${nome}">
+              <span class="btn-option opt-nao">🔴 Não irá</span>
+            </label>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // Efeito visual no card ao selecionar a opção
+      document.querySelectorAll('.member-option input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          const memberId = this.getAttribute('data-member-id');
+          const parentCard = document.getElementById(`card-member-${memberId}`);
+          if (parentCard) {
+            parentCard.classList.remove('status-confirmed', 'status-declined');
+            if (this.value === 'Confirmado') {
+              parentCard.classList.add('status-confirmed');
+            } else {
+              parentCard.classList.add('status-declined');
+            }
+          }
+        });
+      });
+    }
+
+    async function loadMembersFromApi() {
+      try {
+        const fetchUrl = window.location.href.split('?')[0].replace('/rsvp', '/rsvp-members') + `?id=${guestId}`;
+        const response = await fetch(fetchUrl);
+        if (response.ok) {
+          const data = await response.json();
+          
+          let list = [];
+          if (Array.isArray(data)) {
+            list = data;
+          } else if (data && data.membros) {
+            list = data.membros;
+          }
+
+          if (list.length > 0) {
+            membersData = list;
+            
+            // Pega o nome do titular a partir do primeiro membro ou do titular
+            const titular = list.find(m => (m.parentesco || '').toLowerCase().includes('titular')) || list[0];
+            if (titular && (titular.nome || titular.Nome_Membro)) {
+              guestName = titular.nome || titular.Nome_Membro;
+            }
+          }
+
+          // Atualiza os nomes nos elementos da tela
+          const finalName = guestName || 'Convidado(a) Especial';
+          document.getElementById('guest-name').value = finalName;
+          document.getElementById('guest-name-display').innerText = finalName;
+
+          // Verifica se já confirmou previamente
+          const jaConfirmouAnteriormente = list.some(m => {
+            const st = (m.status || m.status_presenca || m.Status_Presenca || '').toString().trim();
+            return st !== '' && st.toLowerCase() !== 'pendente';
+          });
+
+          // Se já respondeu anteriormente, abre a tela de pós-obrigado com o nome correto!
+          if (jaConfirmouAnteriormente) {
+            document.getElementById('success-title').innerText = 'Presença Confirmada!';
+            document.getElementById('success-message').innerHTML = `Olá, <strong>${finalName}</strong>! A presença da sua família já foi registrada anteriormente com muito carinho para a <strong>Sabrina & Moab</strong>.`;
+            document.getElementById('btn-reopen').style.display = 'inline-block';
+            document.getElementById('success-overlay').style.display = 'flex';
+          }
+        }
+      } catch (e) {
+        console.log('Usando membros padrão:', e);
+      }
+      renderMembers(membersData);
+    }
+
+    // Botão para permitir rever/alterar se o convidado quiser
+    document.getElementById('btn-reopen').addEventListener('click', () => {
+      document.getElementById('success-overlay').style.display = 'none';
+    });
+
+    loadMembersFromApi();
+
+    // Submissão do Formulário
+    const form = document.getElementById('rsvp-form');
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('btn-submit');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span class="loading-spinner"></span> Registrando...';
+
+      const presencasMembros = [];
+      const list = (membersData && membersData.length > 0) ? membersData : [{ id_acompanhante: guestId + '-1', nome: guestName }];
+      list.forEach((membro, index) => {
+        const id = membro.id_acompanhante || `${guestId}-${index + 1}`;
+        const nome = membro.nome || membro.Nome_Membro || 'Convidado';
+        const radioChecked = document.querySelector(`input[name="status_presenca_${id}"]:checked`);
+        const status = radioChecked ? radioChecked.value : 'Pendente';
+
+        presencasMembros.push({
+          id_acompanhante: id,
+          nome: nome,
+          status_presenca: status
+        });
+      });
+
+      const payload = {
+        id_titular: document.getElementById('guest-id').value,
+        nome_titular: document.getElementById('guest-name').value,
+        recado_aos_noivos: document.getElementById('recado').value,
+        membros: presencasMembros
+      };
+
+      try {
+        const currentUrl = window.location.href.split('?')[0];
+        const submitUrl = currentUrl.replace('/rsvp', '/rsvp-submit');
+        
+        await fetch(submitUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        document.getElementById('success-title').innerText = 'Presença Confirmada!';
+        document.getElementById('success-message').innerHTML = `Muito obrigado! A presença da sua família foi registrada com muito carinho para a <strong>Sabrina & Moab</strong>.`;
+        document.getElementById('btn-reopen').style.display = 'none';
+        document.getElementById('success-overlay').style.display = 'flex';
+      } catch (err) {
+        document.getElementById('success-overlay').style.display = 'flex';
+      }
+    });
+  </script>
+</body>
+</html>
