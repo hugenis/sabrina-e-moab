@@ -341,7 +341,7 @@ const server = createServer(async (req, res) => {
       const name = guest?.nome || 'Convidado(a) Especial';
       const html = await readFile(path.join(PUBLIC, 'localizacao.html'), 'utf8');
       const ogTitle = `Olá, ${name}! Localização do casamento | Sabrina & Moab`;
-      const ogDescription = `Veja o endereço e o mapa da Paróquia Nossa Senhora da Esperança. Sabrina & Moab — 28 de novembro de 2026.`;
+      const ogDescription = `Confira os endereços da cerimônia (Paróquia Nossa Senhora da Esperança) e da recepção (Chácara Florestal). Sabrina & Moab — 28 de novembro de 2026.`;
       const ogImage = `https://sabrina-e-moab.hugenis.com/og-localizacao.jpg${id ? `?id=${encodeURIComponent(id)}` : ''}`;
       const ogUrl = `https://sabrina-e-moab.hugenis.com/localizacao${id ? `?id=${encodeURIComponent(id)}` : ''}`;
       const rendered = html

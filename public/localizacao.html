@@ -58,10 +58,18 @@
       color: #fff;
       padding: 18px 12px 26px;
     }
+    .avatar-wrapper {
+      position: relative;
+      display: block;
+      width: 132px;
+      margin: 0 auto 16px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    .avatar-wrapper:hover { transform: scale(1.04); }
     .avatar-frame {
       width: 132px;
       height: 132px;
-      margin: 0 auto 16px;
       border-radius: 50%;
       border: 3px solid var(--gold);
       background: #ffffff;
@@ -85,6 +93,43 @@
     }
     #avatar-img-1 { opacity: 1; z-index: 2; }
     #avatar-img-2 { opacity: 0; z-index: 1; }
+    .zoom-hint {
+      position: absolute;
+      bottom: 0;
+      right: 4px;
+      background: var(--wine-primary);
+      border: 1.5px solid var(--gold);
+      color: #ffffff;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.2s ease;
+      z-index: 5;
+    }
+    .avatar-wrapper:hover .zoom-hint { transform: scale(1.15) rotate(10deg); }
+    .photo-counter-badge {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(32, 2, 7, 0.88);
+      border: 1px solid var(--gold);
+      color: var(--gold-light);
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 9px;
+      border-radius: 12px;
+      letter-spacing: 0.5px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      white-space: nowrap;
+      pointer-events: none;
+      z-index: 5;
+    }
     .hero h1 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(34px, 7vw, 54px);
@@ -157,6 +202,15 @@
       background: #f6eef0;
       min-height: 260px;
     }
+    .map-caption {
+      margin: 20px 22px 6px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--wine-primary);
+    }
+    .map-caption + .map-wrap { margin-top: 0; }
     .map-wrap iframe { display: block; width: 100%; height: 300px; border: 0; }
     .actions {
       display: flex;
@@ -231,6 +285,128 @@
       line-height: 1.6;
     }
     .footer a { color: var(--wine-primary); font-weight: 700; }
+
+    /* Lightbox premium das fotos */
+    .photo-modal {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(15, 1, 4, 0.94);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 20px;
+      cursor: pointer;
+      animation: modalFadeIn 0.35s ease forwards;
+    }
+    @keyframes modalFadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .photo-modal-content {
+      position: relative;
+      max-width: 90vw;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: default;
+    }
+    .photo-modal-img-container {
+      position: relative;
+      max-width: 90vw;
+      max-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-modal img {
+      max-width: 100%;
+      max-height: 75vh;
+      border-radius: 16px;
+      border: 3px solid var(--gold);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 35px rgba(212, 175, 55, 0.45);
+      object-fit: contain;
+      transition: opacity 1s ease-in-out;
+      will-change: opacity;
+    }
+    .modal-nav-btn {
+      position: absolute;
+      top: 45%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(32, 2, 7, 0.85);
+      border: 2px solid var(--gold);
+      color: #ffffff;
+      font-size: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      user-select: none;
+      padding-bottom: 3px;
+    }
+    .modal-prev-btn { left: -24px; }
+    .modal-next-btn { right: -24px; }
+    .modal-nav-btn:hover {
+      background: var(--wine-primary);
+      border-color: var(--gold-light);
+      color: var(--gold-light);
+      transform: translateY(-50%) scale(1.15);
+    }
+    @media (max-width: 640px) {
+      .modal-prev-btn { left: 8px; width: 40px; height: 40px; font-size: 24px; }
+      .modal-next-btn { right: 8px; width: 40px; height: 40px; font-size: 24px; }
+    }
+    .photo-modal-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 12px;
+      gap: 3px;
+    }
+    .photo-modal-counter {
+      color: var(--gold-light);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+    .photo-modal-caption {
+      color: #ffffff;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      text-align: center;
+    }
+    .btn-close-modal {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 42px;
+      height: 42px;
+      background: var(--wine-primary);
+      border: 2px solid var(--gold);
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      transition: all 0.2s ease;
+      z-index: 105;
+    }
+    .btn-close-modal:hover { transform: scale(1.1); background: var(--wine-light); }
     @media (max-width: 430px) {
       .actions { flex-direction: column; }
       .btn { flex: 1 1 auto; }
@@ -241,9 +417,13 @@
 <body>
   <main class="page">
     <header class="hero">
-      <div class="avatar-frame" aria-label="Fotos de Sabrina e Moab">
-        <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-33.jpg" alt="Sabrina e Moab" class="couple-avatar" id="avatar-img-1">
-        <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-61.jpg" alt="Sabrina e Moab" class="couple-avatar" id="avatar-img-2">
+      <div class="avatar-wrapper" id="avatar-btn" role="button" tabindex="0" aria-label="Ampliar fotos de Sabrina e Moab">
+        <div class="avatar-frame">
+          <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-33.jpg" alt="Sabrina e Moab" class="couple-avatar" id="avatar-img-1">
+          <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-61.jpg" alt="Sabrina e Moab" class="couple-avatar" id="avatar-img-2">
+        </div>
+        <div class="zoom-hint">🔍</div>
+        <div class="photo-counter-badge" id="photo-counter-badge">1 / 11</div>
       </div>
       <h1>Sabrina &amp; Moab</h1>
       <p>28 de Novembro de 2026</p>
@@ -253,15 +433,22 @@
       <div class="greeting">
         <span class="eyebrow">Localização do casamento</span>
         <h2>Olá, {{NOME}}!</h2>
-        <p>Estamos muito felizes em ter você conosco. Confira abaixo o endereço da cerimônia e abra o mapa para vir com tranquilidade.</p>
+        <p>Estamos muito felizes em ter você conosco. Confira abaixo os endereços da cerimônia e da recepção e abra o mapa para vir com tranquilidade.</p>
       </div>
 
       <div class="venue">
-        <strong>Paróquia Nossa Senhora da Esperança</strong>
+        <strong>⛪ Cerimônia — Paróquia Nossa Senhora da Esperança</strong>
         <span>R. Nossa Sra. de Nazaré, 101 — Cidade Dutra</span>
-        <span>São Paulo — SP</span>
+        <span>São Paulo — SP · Cerimônia às 17h20</span>
       </div>
 
+      <div class="venue">
+        <strong>🥂 Recepção — Chácara Florestal</strong>
+        <span>Estrada Florestal, 650 — Parque Florestal (Parelheiros)</span>
+        <span>São Paulo — SP · Recepção após a cerimônia</span>
+      </div>
+
+      <p class="map-caption">⛪ Cerimônia — Paróquia Nossa Senhora da Esperança</p>
       <div class="map-wrap">
         <iframe
           title="Mapa da Paróquia Nossa Senhora da Esperança"
@@ -271,9 +458,21 @@
         ></iframe>
       </div>
 
+      <p class="map-caption">🥂 Recepção — Chácara Florestal</p>
+      <div class="map-wrap">
+        <iframe
+          title="Mapa da Chácara Florestal"
+          src="https://maps.google.com/maps?q=Ch%C3%A1cara%20Florestal%20Estrada%20Florestal%2C%20650%20Parelheiros%20S%C3%A3o%20Paulo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
       <div class="actions">
-        <a class="btn btn-primary" href="https://maps.google.com/?q=Par%C3%B3quia+Nossa+Senhora+da+Esperan%C3%A7a+R.+Nossa+Sra.+de+Nazar%C3%A9,+101+-+Cidade+Dutra,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">📍 Abrir no Google Maps</a>
-        <a class="btn btn-gold" href="https://waze.com/ul?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Abrir no Waze</a>
+        <a class="btn btn-primary" href="https://maps.google.com/?q=Par%C3%B3quia+Nossa+Senhora+da+Esperan%C3%A7a+R.+Nossa+Sra.+de+Nazar%C3%A9,+101+-+Cidade+Dutra,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">📍 Cerimônia no Maps</a>
+        <a class="btn btn-gold" href="https://waze.com/ul?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Cerimônia no Waze</a>
+        <a class="btn btn-primary" href="https://maps.google.com/?q=Ch%C3%A1cara+Florestal+Estrada+Florestal,+650,+Parelheiros,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">🌳 Chácara no Maps</a>
+        <a class="btn btn-gold" href="https://waze.com/ul?q=Ch%C3%A1cara%20Florestal%20Estrada%20Florestal%2C%20650%2C%20Parelheiros%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Chácara no Waze</a>
         <a class="btn btn-outline" href="{{RSVP_URL}}">💌 Confirmar presença</a>
       </div>
 
@@ -290,6 +489,22 @@
       </div>
     </section>
   </main>
+
+  <!-- Lightbox premium das fotos dos noivos -->
+  <div id="photo-modal" class="photo-modal" role="dialog" aria-modal="true" aria-label="Fotos de Sabrina e Moab">
+    <div class="photo-modal-content">
+      <button type="button" class="btn-close-modal" id="btn-close-modal" title="Fechar">✕</button>
+      <button type="button" class="modal-nav-btn modal-prev-btn" id="modal-prev-btn" title="Foto anterior">‹</button>
+      <button type="button" class="modal-nav-btn modal-next-btn" id="modal-next-btn" title="Próxima foto">›</button>
+      <div class="photo-modal-img-container">
+        <img src="/images/site-de-casamento-icasei-ensaio-sabrina-e-moab-33.jpg" alt="Sabrina e Moab ampliada" class="photo-modal-img" id="photo-modal-img">
+      </div>
+      <div class="photo-modal-footer">
+        <span class="photo-modal-counter" id="modal-counter">Foto 1 de 11</span>
+        <div class="photo-modal-caption">Sabrina &amp; Moab</div>
+      </div>
+    </div>
+  </div>
 
   <script>
     (function () {
@@ -308,25 +523,129 @@
       ];
       const img1 = document.getElementById('avatar-img-1');
       const img2 = document.getElementById('avatar-img-2');
-      if (!img1 || !img2) return;
+      const badge = document.getElementById('photo-counter-badge');
+      const avatarBtn = document.getElementById('avatar-btn');
+      const modal = document.getElementById('photo-modal');
+      const modalImg = document.getElementById('photo-modal-img');
+      const modalCounter = document.getElementById('modal-counter');
+      if (!img1 || !img2 || !avatarBtn || !modal) return;
 
-      let index = 0;
+      let current = 0;
       let layer = 1;
-      setInterval(() => {
-        index = (index + 1) % photos.length;
-        const next = photos[index];
-        if (layer === 1) {
-          img2.src = next;
-          img2.style.opacity = '1';
-          img1.style.opacity = '0';
-          layer = 2;
+      let timer = null;
+
+      function updateModal() {
+        if (!modalImg) return;
+        modalImg.style.opacity = '0.35';
+        setTimeout(() => {
+          modalImg.src = photos[current];
+          modalImg.style.opacity = '1';
+        }, 150);
+        if (modalCounter) modalCounter.innerText = `Foto ${current + 1} de ${photos.length}`;
+      }
+
+      function show(nextIndex, animate = true) {
+        current = (nextIndex + photos.length) % photos.length;
+        const next = photos[current];
+
+        if (animate) {
+          if (layer === 1) {
+            img2.src = next;
+            img2.style.opacity = '1';
+            img1.style.opacity = '0';
+            layer = 2;
+          } else {
+            img1.src = next;
+            img1.style.opacity = '1';
+            img2.style.opacity = '0';
+            layer = 1;
+          }
         } else {
           img1.src = next;
           img1.style.opacity = '1';
           img2.style.opacity = '0';
           layer = 1;
         }
-      }, 5000);
+
+        if (badge) badge.innerText = `${current + 1} / ${photos.length}`;
+        if (modal.style.display === 'flex') updateModal();
+      }
+
+      function startTimer() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(() => {
+          if (modal.style.display !== 'flex') show(current + 1);
+        }, 5000);
+      }
+
+      function openModal() {
+        updateModal();
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+        startTimer();
+      }
+
+      avatarBtn.addEventListener('click', openModal);
+      avatarBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal();
+        }
+      });
+
+      document.getElementById('btn-close-modal')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        closeModal();
+      });
+      document.getElementById('modal-prev-btn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        show(current - 1);
+        startTimer();
+      });
+      document.getElementById('modal-next-btn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        show(current + 1);
+        startTimer();
+      });
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (modal.style.display !== 'flex') return;
+        if (e.key === 'ArrowLeft') {
+          show(current - 1);
+          startTimer();
+        } else if (e.key === 'ArrowRight') {
+          show(current + 1);
+          startTimer();
+        } else if (e.key === 'Escape') {
+          closeModal();
+        }
+      });
+
+      let touchX = 0;
+      let touchY = 0;
+      modal.addEventListener('touchstart', (e) => {
+        touchX = e.changedTouches[0].clientX;
+        touchY = e.changedTouches[0].clientY;
+      }, { passive: true });
+      modal.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchX;
+        const dy = e.changedTouches[0].clientY - touchY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          show(current + (dx < 0 ? 1 : -1));
+          startTimer();
+        }
+      }, { passive: true });
+
+      show(0, false);
+      startTimer();
     })();
 
     (function () {

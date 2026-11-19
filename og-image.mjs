@@ -88,9 +88,10 @@ export async function renderLocationOg({ id, name }) {
     <line x1="420" y1="278" x2="780" y2="278" stroke="url(#gold)" stroke-width="2" opacity="0.75"/>
     <text x="600" y="346" fill="#f6e3b0" font-size="28">Olá,</text>
     <text x="600" y="424" fill="#ffffff" font-family="DejaVu Serif, Georgia, serif" font-size="${nameLine.size}" font-weight="bold">${escapeXml(nameLine.text)}</text>
-    <text x="600" y="492" fill="#f3d9a2" font-size="26">Paróquia Nossa Senhora da Esperança</text>
-    <text x="600" y="532" fill="#e7c9a0" font-size="22">R. Nossa Sra. de Nazaré, 101 · Cidade Dutra · São Paulo/SP</text>
-    <text x="600" y="584" fill="#d9b56a" font-size="17" letter-spacing="2">sabrina-e-moab.hugenis.com</text>
+    <text x="600" y="482" fill="#f3d9a2" font-size="22">Cerimônia · Paróquia Nossa Senhora da Esperança</text>
+    <text x="600" y="514" fill="#e7c9a0" font-size="19">Recepção · Chácara Florestal — Estrada Florestal, 650 · Parelheiros</text>
+    <text x="600" y="550" fill="#e7c9a0" font-size="16">São Paulo/SP · 28 de novembro de 2026</text>
+    <text x="600" y="590" fill="#d9b56a" font-size="16" letter-spacing="2">sabrina-e-moab.hugenis.com</text>
   </g>
 </svg>`;
 
