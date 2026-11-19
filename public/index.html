@@ -1434,18 +1434,26 @@
         const currentUrl = window.location.href.split('?')[0];
         const submitUrl = currentUrl.replace('/rsvp', '/rsvp-submit');
         
-        await fetch(submitUrl, {
+        const response = await fetch(submitUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
+        if (!response.ok) {
+          throw new Error('Falha ao registrar a presença.');
+        }
 
         document.getElementById('success-title').innerText = 'Presença Confirmada!';
         document.getElementById('success-message').innerHTML = `Muito obrigado! A presença da sua família foi registrada com muito carinho para a <strong>Sabrina & Moab</strong>.`;
         document.getElementById('btn-reopen').style.display = 'none';
         document.getElementById('success-overlay').style.display = 'flex';
       } catch (err) {
+        document.getElementById('success-title').innerText = 'Não foi possível registrar';
+        document.getElementById('success-message').innerHTML = 'Ocorreu um problema ao enviar sua confirmação. Por favor, tente novamente em instantes.';
+        document.getElementById('btn-reopen').style.display = 'inline-block';
         document.getElementById('success-overlay').style.display = 'flex';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirmar Presença';
       }
     });
   </script>
