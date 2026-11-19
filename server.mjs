@@ -379,15 +379,16 @@ const server = createServer(async (req, res) => {
       const sheet = await loadSheet();
       const guest = id ? resolveGuest(sheet, id) : null;
       const name = guest?.nome || 'Convidado(a) Especial';
+      const resolvedId = guest?.id || id;
       const html = await readFile(path.join(PUBLIC, 'localizacao.html'), 'utf8');
       const ogTitle = `Olá, ${name}! Localização do casamento | Sabrina & Moab`;
       const ogDescription = `Confira os endereços da cerimônia (Paróquia Nossa Senhora da Esperança) e da recepção (Chácara Florestal). Sabrina & Moab — 28 de novembro de 2026.`;
-      const ogImage = `https://sabrina-e-moab.hugenis.com/og-localizacao.jpg${id ? `?id=${encodeURIComponent(id)}` : ''}`;
+      const ogImage = `https://sabrina-e-moab.hugenis.com/og-localizacao.jpg${resolvedId ? `?id=${encodeURIComponent(resolvedId)}` : ''}`;
       const ogUrl = `https://sabrina-e-moab.hugenis.com/localizacao${id ? `?id=${encodeURIComponent(id)}` : ''}`;
       const rendered = html
         .replaceAll('{{NOME}}', escapeHtml(name))
-        .replaceAll('{{ID}}', escapeHtml(id))
-        .replaceAll('{{RSVP_URL}}', escapeHtml(`/rsvp${id ? `?id=${encodeURIComponent(id)}` : ''}`))
+        .replaceAll('{{ID}}', escapeHtml(resolvedId))
+        .replaceAll('{{RSVP_URL}}', escapeHtml(`/rsvp${resolvedId ? `?id=${encodeURIComponent(resolvedId)}` : ''}`))
         .replaceAll('{{OG_TITLE}}', escapeHtml(ogTitle))
         .replaceAll('{{OG_DESC}}', escapeHtml(ogDescription))
         .replaceAll('{{OG_IMAGE}}', escapeHtml(ogImage))
