@@ -47,3 +47,10 @@ docker run -p 3010:3000 -v sabrina-data:/app/data sabrina-e-moab
 ```
 
 Em produção, monte um volume persistente em `/app/data` para não perder as confirmações.
+
+## Integrações em produção
+
+- **Google Sheets** (somente leitura): abas `Convidados` (`gid=0`) e `Acompanhantes` (`gid=1192521466`).
+- **N8N**: `https://n8n.servidorn8nafixcode.xyz/webhook` — leitura de acompanhantes (`/rsvp-members`) e gravação da confirmação (`/rsvp-submit`, que também dispara o WhatsApp).
+- **OpenGraph dinâmico**: `/og-localizacao.jpg?id=GUEST_ID` gera um cartão 1200×630 com o nome do convidado e uma foto do casal.
+- **Página de localização**: `/localizacao?id=GUEST_ID` com nome, endereço, mapa, Google Maps/Waze e contagem regressiva.

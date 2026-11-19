@@ -3,6 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { renderLocationOg } from './og-image.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC = path.join(ROOT, 'public');
@@ -321,16 +322,36 @@ const server = createServer(async (req, res) => {
       }
     }
 
+    if (pathname === '/og-localizacao.jpg' || pathname === '/og-localizacao.png') {
+      const id = (url.searchParams.get('id') || '').trim();
+      const sheet = await loadSheet();
+      const guest = id ? sheet.guestsById.get(id) : null;
+      const name = guest?.nome || 'Convidado(a) Especial';
+      const image = await renderLocationOg({ id, name });
+      return send(res, 200, image, 'image/jpeg', {
+        'Cache-Control': 'public, max-age=86400, s-maxage=86400',
+        'Content-Disposition': 'inline',
+      });
+    }
+
     if (pathname === '/localizacao') {
       const id = (url.searchParams.get('id') || '').trim();
       const sheet = await loadSheet();
       const guest = id ? sheet.guestsById.get(id) : null;
       const name = guest?.nome || 'Convidado(a) Especial';
       const html = await readFile(path.join(PUBLIC, 'localizacao.html'), 'utf8');
+      const ogTitle = `Olá, ${name}! Localização do casamento | Sabrina & Moab`;
+      const ogDescription = `Veja o endereço e o mapa da Paróquia Nossa Senhora da Esperança. Sabrina & Moab — 28 de novembro de 2026.`;
+      const ogImage = `https://sabrina-e-moab.hugenis.com/og-localizacao.jpg${id ? `?id=${encodeURIComponent(id)}` : ''}`;
+      const ogUrl = `https://sabrina-e-moab.hugenis.com/localizacao${id ? `?id=${encodeURIComponent(id)}` : ''}`;
       const rendered = html
         .replaceAll('{{NOME}}', escapeHtml(name))
         .replaceAll('{{ID}}', escapeHtml(id))
-        .replaceAll('{{RSVP_URL}}', escapeHtml(`/rsvp${id ? `?id=${encodeURIComponent(id)}` : ''}`));
+        .replaceAll('{{RSVP_URL}}', escapeHtml(`/rsvp${id ? `?id=${encodeURIComponent(id)}` : ''}`))
+        .replaceAll('{{OG_TITLE}}', escapeHtml(ogTitle))
+        .replaceAll('{{OG_DESC}}', escapeHtml(ogDescription))
+        .replaceAll('{{OG_IMAGE}}', escapeHtml(ogImage))
+        .replaceAll('{{OG_URL}}', escapeHtml(ogUrl));
       return send(res, 200, rendered, MIME['.html'], { 'Cache-Control': 'no-cache' });
     }
 
