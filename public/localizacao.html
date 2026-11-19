@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Localização | Sabrina &amp; Moab</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --wine-primary: #6b0f24;
+      --wine-dark: #400513;
+      --wine-deep: #200207;
+      --wine-light: #8e1b36;
+      --wine-subtle: #fcf4f6;
+      --wine-border: #ebd3da;
+      --gold: #d4af37;
+      --gold-light: #fef08a;
+      --gold-dark: #b89025;
+      --card-bg: rgba(255, 255, 255, 0.96);
+      --text-main: #2b0c14;
+      --text-muted: #6b4e56;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      color: var(--text-main);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.18), transparent 42%),
+        radial-gradient(circle at 85% 85%, rgba(107, 15, 36, 0.35), transparent 45%),
+        linear-gradient(145deg, var(--wine-deep) 0%, var(--wine-dark) 48%, #2e0711 100%);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 28px 16px 40px;
+    }
+    .page { width: 100%; max-width: 780px; }
+    .hero {
+      text-align: center;
+      color: #fff;
+      padding: 18px 12px 26px;
+    }
+    .monogram {
+      width: 70px; height: 70px; margin: 0 auto 14px;
+      border-radius: 50%;
+      border: 1px solid rgba(254, 240, 138, 0.55);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px; font-weight: 700; color: var(--gold-light);
+      background: rgba(0, 0, 0, 0.18);
+      box-shadow: 0 0 40px rgba(212, 175, 55, 0.22);
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(34px, 7vw, 54px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .hero p {
+      margin-top: 8px;
+      color: #f3d9a2;
+      font-size: 13px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 22px;
+      border: 1px solid rgba(235, 211, 218, 0.9);
+      box-shadow: 0 22px 60px rgba(0, 0, 0, 0.32);
+      overflow: hidden;
+    }
+    .greeting {
+      padding: 26px 26px 8px;
+      text-align: center;
+    }
+    .greeting .eyebrow {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .greeting h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 5vw, 36px);
+      color: var(--wine-primary);
+      margin-top: 6px;
+      line-height: 1.15;
+    }
+    .greeting p {
+      margin-top: 8px;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+    .venue {
+      margin: 20px 22px 0;
+      padding: 18px;
+      border-radius: 16px;
+      background: var(--wine-subtle);
+      border: 1px solid var(--wine-border);
+      display: grid;
+      gap: 6px;
+    }
+    .venue strong {
+      color: var(--wine-primary);
+      font-size: 15px;
+    }
+    .venue span {
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .map-wrap {
+      margin: 18px 22px 0;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--wine-border);
+      background: #f6eef0;
+      min-height: 260px;
+    }
+    .map-wrap iframe { display: block; width: 100%; height: 300px; border: 0; }
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 20px 22px 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 0.15s ease, filter 0.15s ease;
+      flex: 1 1 190px;
+    }
+    .btn:hover { transform: translateY(-1px); filter: brightness(1.04); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--wine-primary), var(--wine-light));
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      color: #3a2703;
+      border: 1px solid var(--gold-dark);
+    }
+    .btn-outline {
+      background: #fff;
+      color: var(--wine-primary);
+      border: 1px solid var(--wine-border);
+    }
+    .countdown {
+      margin: 14px 22px 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+    }
+    .countdown .box {
+      border-radius: 12px;
+      padding: 10px 6px;
+      background: #fff;
+      border: 1px solid var(--wine-border);
+    }
+    .countdown .num {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 25px;
+      font-weight: 700;
+      color: var(--wine-primary);
+      line-height: 1;
+    }
+    .countdown .lbl {
+      display: block;
+      margin-top: 4px;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+    .footer {
+      padding: 20px 22px 24px;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    .footer a { color: var(--wine-primary); font-weight: 700; }
+    @media (max-width: 430px) {
+      .actions { flex-direction: column; }
+      .btn { flex: 1 1 auto; }
+      .map-wrap iframe { height: 240px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="monogram">S&amp;M</div>
+      <h1>Sabrina &amp; Moab</h1>
+      <p>28 de Novembro de 2026</p>
+    </header>
+
+    <section class="card">
+      <div class="greeting">
+        <span class="eyebrow">Localização do casamento</span>
+        <h2>Olá, {{NOME}}!</h2>
+        <p>Estamos muito felizes em ter você conosco. Confira abaixo o endereço da cerimônia e abra o mapa para vir com tranquilidade.</p>
+      </div>
+
+      <div class="venue">
+        <strong>Paróquia Nossa Senhora da Esperança</strong>
+        <span>R. Nossa Sra. de Nazaré, 101 — Cidade Dutra</span>
+        <span>São Paulo — SP</span>
+      </div>
+
+      <div class="map-wrap">
+        <iframe
+          title="Mapa da Paróquia Nossa Senhora da Esperança"
+          src="https://maps.google.com/maps?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="https://maps.google.com/?q=Par%C3%B3quia+Nossa+Senhora+da+Esperan%C3%A7a+R.+Nossa+Sra.+de+Nazar%C3%A9,+101+-+Cidade+Dutra,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">📍 Abrir no Google Maps</a>
+        <a class="btn btn-gold" href="https://waze.com/ul?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Abrir no Waze</a>
+        <a class="btn btn-outline" href="{{RSVP_URL}}">💌 Confirmar presença</a>
+      </div>
+
+      <div class="countdown" id="countdown" aria-label="Contagem regressiva para o casamento">
+        <div class="box"><span class="num" id="days">--</span><span class="lbl">Dias</span></div>
+        <div class="box"><span class="num" id="hours">--</span><span class="lbl">Horas</span></div>
+        <div class="box"><span class="num" id="minutes">--</span><span class="lbl">Minutos</span></div>
+        <div class="box"><span class="num" id="seconds">--</span><span class="lbl">Segundos</span></div>
+      </div>
+
+      <div class="footer">
+        Qualquer dúvida, fale com os noivos. Será uma alegria celebrar esse dia com você.<br>
+        <a href="{{RSVP_URL}}">Voltar para a confirmação de presença</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const target = new Date('2026-11-28T17:00:00-03:00').getTime();
+      const pad = (n) => String(n).padStart(2, '0');
+      function tick() {
+        const diff = target - Date.now();
+        if (diff <= 0) {
+          ['days', 'hours', 'minutes', 'seconds'].forEach((id) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = '00';
+          });
+          return;
+        }
+        const days = Math.floor(diff / 86400000);
+        const hours = Math.floor((diff % 86400000) / 3600000);
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        document.getElementById('days').textContent = days;
+        document.getElementById('hours').textContent = pad(hours);
+        document.getElementById('minutes').textContent = pad(minutes);
+        document.getElementById('seconds').textContent = pad(seconds);
+      }
+      tick();
+      setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
