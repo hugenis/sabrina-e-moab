@@ -194,6 +194,40 @@
       font-size: 13px;
       line-height: 1.55;
     }
+    .venue-tabs {
+      display: flex;
+      gap: 4px;
+      margin: 18px 22px 0;
+      padding: 4px;
+      background: var(--wine-subtle);
+      border: 1px solid var(--wine-border);
+      border-radius: 14px;
+    }
+    .venue-tab {
+      flex: 1;
+      border: 0;
+      background: transparent;
+      padding: 10px 8px;
+      border-radius: 10px;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .venue-tab.active {
+      background: var(--wine-primary);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(107, 15, 36, 0.25);
+    }
+    .venue-tab:hover:not(.active) { background: rgba(107, 15, 36, 0.07); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .actions-rsvp { padding-top: 14px; }
+    @media (max-width: 430px) {
+      .venue-tab { font-size: 11px; padding: 9px 5px; }
+    }
     .map-wrap {
       margin: 18px 22px 0;
       border-radius: 16px;
@@ -436,43 +470,58 @@
         <p>Estamos muito felizes em ter você conosco. Confira abaixo os endereços da cerimônia e da recepção e abra o mapa para vir com tranquilidade.</p>
       </div>
 
-      <div class="venue">
-        <strong>⛪ Cerimônia — Paróquia Nossa Senhora da Esperança</strong>
-        <span>R. Nossa Sra. de Nazaré, 101 — Cidade Dutra</span>
-        <span>São Paulo — SP · Cerimônia às 17h20</span>
+      <div class="venue-tabs" role="tablist" aria-label="Endereços do casamento">
+        <button type="button" class="venue-tab active" id="tab-cerimonia" role="tab" aria-selected="true" aria-controls="panel-cerimonia" data-tab="cerimonia">⛪ Cerimônia</button>
+        <button type="button" class="venue-tab" id="tab-festa" role="tab" aria-selected="false" aria-controls="panel-festa" data-tab="festa">🥂 Festa / Recepção</button>
       </div>
 
-      <div class="venue">
-        <strong>🥂 Recepção — Chácara Florestal</strong>
-        <span>Estrada Florestal, 650 — Parque Florestal (Parelheiros)</span>
-        <span>São Paulo — SP · Recepção após a cerimônia</span>
-      </div>
+      <section class="tab-panel active" id="panel-cerimonia" role="tabpanel" aria-labelledby="tab-cerimonia" data-panel="cerimonia">
+        <div class="venue">
+          <strong>⛪ Cerimônia — Paróquia Nossa Senhora da Esperança</strong>
+          <span>R. Nossa Sra. de Nazaré, 101 — Cidade Dutra</span>
+          <span>São Paulo — SP · Cerimônia às 17h20</span>
+        </div>
 
-      <p class="map-caption">⛪ Cerimônia — Paróquia Nossa Senhora da Esperança</p>
-      <div class="map-wrap">
-        <iframe
-          title="Mapa da Paróquia Nossa Senhora da Esperança"
-          src="https://maps.google.com/maps?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&t=&z=16&ie=UTF8&iwloc=&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+        <p class="map-caption">⛪ Cerimônia — Paróquia Nossa Senhora da Esperança</p>
+        <div class="map-wrap">
+          <iframe
+            title="Mapa da Paróquia Nossa Senhora da Esperança"
+            src="https://maps.google.com/maps?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
 
-      <p class="map-caption">🥂 Recepção — Chácara Florestal</p>
-      <div class="map-wrap">
-        <iframe
-          title="Mapa da Chácara Florestal"
-          src="https://maps.google.com/maps?q=Ch%C3%A1cara%20Florestal%20Estrada%20Florestal%2C%20650%20Parelheiros%20S%C3%A3o%20Paulo&t=&z=15&ie=UTF8&iwloc=&output=embed"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://maps.google.com/?q=Par%C3%B3quia+Nossa+Senhora+da+Esperan%C3%A7a+R.+Nossa+Sra.+de+Nazar%C3%A9,+101+-+Cidade+Dutra,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">📍 Cerimônia no Maps</a>
+          <a class="btn btn-gold" href="https://waze.com/ul?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Cerimônia no Waze</a>
+        </div>
+      </section>
 
-      <div class="actions">
-        <a class="btn btn-primary" href="https://maps.google.com/?q=Par%C3%B3quia+Nossa+Senhora+da+Esperan%C3%A7a+R.+Nossa+Sra.+de+Nazar%C3%A9,+101+-+Cidade+Dutra,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">📍 Cerimônia no Maps</a>
-        <a class="btn btn-gold" href="https://waze.com/ul?q=Par%C3%B3quia%20Nossa%20Senhora%20da%20Esperan%C3%A7a%20R.%20Nossa%20Sra.%20de%20Nazar%C3%A9%2C%20101%20-%20Cidade%20Dutra%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Cerimônia no Waze</a>
-        <a class="btn btn-primary" href="https://maps.google.com/?q=Ch%C3%A1cara+Florestal+Estrada+Florestal,+650,+Parelheiros,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">🌳 Chácara no Maps</a>
-        <a class="btn btn-gold" href="https://waze.com/ul?q=Ch%C3%A1cara%20Florestal%20Estrada%20Florestal%2C%20650%2C%20Parelheiros%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Chácara no Waze</a>
+      <section class="tab-panel" id="panel-festa" role="tabpanel" aria-labelledby="tab-festa" aria-hidden="true" data-panel="festa">
+        <div class="venue">
+          <strong>🥂 Recepção — Chácara Florestal</strong>
+          <span>Estrada Florestal, 650 — Parque Florestal (Parelheiros)</span>
+          <span>São Paulo — SP · Recepção após a cerimônia</span>
+        </div>
+
+        <p class="map-caption">🥂 Recepção — Chácara Florestal</p>
+        <div class="map-wrap">
+          <iframe
+            title="Mapa da Chácara Florestal"
+            src="https://maps.google.com/maps?q=Ch%C3%A1cara%20Florestal%20Estrada%20Florestal%2C%20650%20Parelheiros%20S%C3%A3o%20Paulo&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
+        <div class="actions">
+          <a class="btn btn-primary" href="https://maps.google.com/?q=Ch%C3%A1cara+Florestal+Estrada+Florestal,+650,+Parelheiros,+S%C3%A3o+Paulo+-+SP" target="_blank" rel="noopener noreferrer">🌳 Chácara no Maps</a>
+          <a class="btn btn-gold" href="https://waze.com/ul?q=Ch%C3%A1cara%20Florestal%20Estrada%20Florestal%2C%20650%2C%20Parelheiros%2C%20S%C3%A3o%20Paulo%20-%20SP&navigate=yes" target="_blank" rel="noopener noreferrer">🚗 Chácara no Waze</a>
+        </div>
+      </section>
+
+      <div class="actions actions-rsvp">
         <a class="btn btn-outline" href="{{RSVP_URL}}">💌 Confirmar presença</a>
       </div>
 
@@ -671,6 +720,47 @@
       }
       tick();
       setInterval(tick, 1000);
+    })();
+  </script>
+
+  <script>
+    (function () {
+      // 28/11/2026 18:00 em São Paulo (UTC-3)
+      const switchAt = new Date('2026-11-28T18:00:00-03:00').getTime();
+      const tabs = Array.from(document.querySelectorAll('.venue-tab'));
+      const panels = Array.from(document.querySelectorAll('.tab-panel'));
+
+      function activate(id) {
+        tabs.forEach((tab) => {
+          const on = tab.dataset.tab === id;
+          tab.classList.toggle('active', on);
+          tab.setAttribute('aria-selected', String(on));
+        });
+        panels.forEach((panel) => {
+          const on = panel.dataset.panel === id;
+          panel.classList.toggle('active', on);
+          panel.setAttribute('aria-hidden', String(!on));
+        });
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activate(tab.dataset.tab));
+      });
+
+      function scheduleSwitch() {
+        const remaining = switchAt - Date.now();
+        if (remaining <= 0) {
+          activate('festa');
+          return;
+        }
+        activate('cerimonia');
+        setTimeout(() => {
+          if (Date.now() >= switchAt) activate('festa');
+          else scheduleSwitch();
+        }, Math.min(remaining, 2147483647));
+      }
+
+      scheduleSwitch();
     })();
   </script>
 </body>
