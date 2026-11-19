@@ -149,7 +149,7 @@ async function fetchSheetTab(gid) {
   return toObjects(parseCsv(await res.text()));
 }
 
-let sheetCache = { at: 0, guestsById: new Map(), membersById: new Map() };
+let sheetCache = { at: 0, guestsById: new Map(), confirmedGuests: [], membersById: new Map() };
 
 async function loadSheet() {
   if (Date.now() - sheetCache.at < SHEET_TTL_MS) return sheetCache;
@@ -173,6 +173,8 @@ async function loadSheet() {
       });
     }
 
+    const confirmedGuests = [...guestsById.values()].filter((guest) => guest.status === '1');
+
     const membersById = new Map();
     for (const row of memberRows) {
       const titular = String(row.ID_Titular || '').trim();
@@ -186,7 +188,7 @@ async function loadSheet() {
       });
     }
 
-    sheetCache = { at: Date.now(), guestsById, membersById };
+    sheetCache = { at: Date.now(), guestsById, confirmedGuests, membersById };
     return sheetCache;
   } catch (error) {
     console.error('Falha ao ler Google Sheets:', error.message);
@@ -218,6 +220,25 @@ async function proxyToN8n(pathAndQuery, init = {}, timeoutMs = 12_000) {
     contentType: response.headers.get('content-type') || 'application/json; charset=utf-8',
     text,
   };
+}
+
+function resolveGuest(sheet, rawId) {
+  const id = String(rawId || '').trim();
+  if (!id) return null;
+
+  const direct = sheet.guestsById.get(id);
+  if (direct) return direct;
+
+  // n8n TEST antigo: tag aleatória de 2 caracteres + índice (1-based) do convidado confirmado.
+  const legacy = id.match(/^([a-z0-9]{2})(\d+)$/i);
+  if (legacy && /[a-z]/i.test(legacy[1])) {
+    const index = Number(legacy[2]) - 1;
+    if (Number.isInteger(index) && index >= 0) {
+      return sheet.confirmedGuests[index] || null;
+    }
+  }
+
+  return null;
 }
 
 /* ------------------------------------------------------------------ */
@@ -259,7 +280,7 @@ const server = createServer(async (req, res) => {
       const sheet = await loadSheet();
       let members = sheet.membersById.get(id) || [];
       if (members.length === 0) {
-        const guest = sheet.guestsById.get(id);
+        const guest = resolveGuest(sheet, id);
         if (guest) {
           members = [
             {
@@ -325,7 +346,7 @@ const server = createServer(async (req, res) => {
     if (pathname === '/og-localizacao.jpg' || pathname === '/og-localizacao.png') {
       const id = (url.searchParams.get('id') || '').trim();
       const sheet = await loadSheet();
-      const guest = id ? sheet.guestsById.get(id) : null;
+      const guest = id ? resolveGuest(sheet, id) : null;
       const name = guest?.nome || 'Convidado(a) Especial';
       const image = await renderLocationOg({ id, name });
       return send(res, 200, image, 'image/jpeg', {
@@ -356,7 +377,7 @@ const server = createServer(async (req, res) => {
     if (pathname === '/localizacao') {
       const id = (url.searchParams.get('id') || '').trim();
       const sheet = await loadSheet();
-      const guest = id ? sheet.guestsById.get(id) : null;
+      const guest = id ? resolveGuest(sheet, id) : null;
       const name = guest?.nome || 'Convidado(a) Especial';
       const html = await readFile(path.join(PUBLIC, 'localizacao.html'), 'utf8');
       const ogTitle = `Olá, ${name}! Localização do casamento | Sabrina & Moab`;
