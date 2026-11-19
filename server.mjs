@@ -334,6 +334,25 @@ const server = createServer(async (req, res) => {
       });
     }
 
+    if (pathname === '/m' || pathname === '/m/' || pathname.startsWith('/m/')) {
+      const fromPath = pathname.startsWith('/m/') ? pathname.slice('/m/'.length) : '';
+      const firstQueryKey = [...url.searchParams.keys()][0] || '';
+      const code = (
+        url.searchParams.get('id') ||
+        url.searchParams.get('code') ||
+        fromPath ||
+        firstQueryKey ||
+        ''
+      ).trim();
+      const target = code ? `/localizacao?id=${encodeURIComponent(code)}` : '/localizacao';
+      res.writeHead(302, {
+        ...SECURITY_HEADERS,
+        Location: target,
+        'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+      });
+      return res.end();
+    }
+
     if (pathname === '/localizacao') {
       const id = (url.searchParams.get('id') || '').trim();
       const sheet = await loadSheet();
